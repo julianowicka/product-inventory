@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "./product-model";
+import {ProductService} from "./product-service";
 
 @Component({
   selector: 'app-product-list',
@@ -8,8 +9,11 @@ import {Product} from "./product-model";
 })
 export class ProductListComponent implements OnInit{
   products: Product[] = [];
-
+  constructor(private productService: ProductService) {
+  }
   ngOnInit(): void {
+    this.products = this.productService.getProducts();
+
     for (let i = 0; i<10; i++){
       const product = new Product()
       product.name = `Product ${i}`;
@@ -19,4 +23,7 @@ export class ProductListComponent implements OnInit{
       this.products.push(product)
     }
   }
+  deleteProducts(id?: number): void {
+  this.productService.deleteProducts(id)
+}
 }
