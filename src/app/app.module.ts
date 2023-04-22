@@ -7,6 +7,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule} from "@angular/forms";
+import {ProductService} from "./product-list/product-service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { FormsModule} from "@angular/forms";
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
