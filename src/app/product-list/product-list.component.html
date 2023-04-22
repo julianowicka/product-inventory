@@ -1,4 +1,20 @@
-<p>product-list works!</p>
-  <p *ngFor="let product of products">
-    {{product.name}}  {{product.price}}
-  </p>>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Price</th>
+    <th scope="col">Quantity</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products; let i = index">
+    <th scope="row">{{ i }}</th>
+    <td>{{ product.name}}</td>
+    <td>{{ product.description}}</td>
+    <td>{{ product.price }}PLN</td>
+    <td>{{ product.quantity }}pcs</td>
+  </tr>
+  </tbody>
+</table>
