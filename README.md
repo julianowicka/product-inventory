@@ -1,96 +1,93 @@
-# Product Inventory Management System
+# Product Inventory Application
 
-![Angular](https://img.shields.io/badge/Angular-15-red?style=flat-square&logo=angular)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-purple?style=flat-square&logo=bootstrap)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue?style=flat-square&logo=typescript)
-![.NET](https://img.shields.io/badge/.NET-Backend-512BD4?style=flat-square&logo=dotnet)
-
-A modern, responsive product inventory management system built with Angular and .NET. This application demonstrates full-stack development skills with a focus on clean architecture, user experience, and modern web technologies.
+A modern Angular application for managing product inventory with a clean, responsive UI.
 
 ## 🚀 Features
 
-- **Product Management**: Add, edit, delete, and view products
-- **Inventory Tracking**: Real-time stock level monitoring
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Modern UI**: Clean, intuitive interface using Bootstrap components
-- **Type Safety**: Built with TypeScript for robust code quality
+- **Product Management**: Add, view, and delete products
+- **Responsive Design**: Built with Bootstrap for mobile-friendly experience
+- **Modern Angular**: Built with Angular 18 and latest best practices
+- **Code Quality**: ESLint and Prettier for consistent code style
 
-## 🛠️ Tech Stack
-
-**Frontend:**
-- Angular 15
-- TypeScript 4.9
-- Bootstrap 5.2
-- ng-bootstrap
-- RxJS
-
-**Backend:**
-- .NET (API)
-- Entity Framework (planned)
-
-## 📦 Installation & Setup
+## 🛠️ Development
 
 ### Prerequisites
-- Node.js (v16 or higher)
+
+- Node.js v20.19+ (use NVM: `nvm use 20.19.4`)
 - npm or yarn
-- Angular CLI
 
-### Getting Started
+### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/product-inventory.git
-   cd product-inventory
-   ```
+```bash
+npm install
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### Development Server
 
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
+```bash
+npm start
+```
 
-4. **Open your browser**
-   Navigate to `http://localhost:4200`
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## 🏗️ Project Structure
+### Build
+
+```bash
+npm run build
+```
+
+### Code Quality
+
+This project uses ESLint and Prettier to maintain high code quality:
+
+```bash
+# Run linting
+npm run lint
+
+# Fix linting issues automatically
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+
+# Check if code is properly formatted
+npm run format:check
+
+# Run both linting and format checking
+npm run code-quality
+```
+
+## 📁 Project Structure
 
 ```
 src/
 ├── app/
-│   ├── components/     # Reusable UI components
-│   ├── services/       # Business logic and API calls
-│   ├── models/         # TypeScript interfaces and types
-│   └── pages/          # Route components
-├── assets/             # Static assets
-└── styles.scss         # Global styles
+│   ├── add-product/          # Add product component
+│   ├── product-list/         # Product list component
+│   ├── app.component.*       # Main app component
+│   ├── app.module.ts         # App module
+│   └── app-routing.module.ts # Routing configuration
+├── assets/                   # Static assets
+└── styles.scss              # Global styles
 ```
 
-## 🚧 Development Status
+## 🎯 Code Quality Standards
 
-This project is actively being improved with modern development practices:
+- **ESLint**: Enforces Angular best practices and TypeScript rules
+- **Prettier**: Ensures consistent code formatting
+- **Modern Angular**: Uses inject() function instead of constructor injection
+- **Accessibility**: Proper label associations and semantic HTML
 
-- ✅ Initial Angular setup
-- ✅ Bootstrap integration
-- 🔄 Currently upgrading to latest Angular version
-- 📋 Planned: Unit testing implementation
-- 📋 Planned: E2E testing with Cypress
-- 📋 Planned: Backend API integration
+## 🔧 Configuration Files
 
-## 🤝 Contributing
+- `.eslintrc.js` - ESLint configuration
+- `.prettierrc` - Prettier formatting rules
+- `.prettierignore` - Files to exclude from formatting
 
-This is a portfolio project, but suggestions and feedback are welcome! Feel free to open an issue or reach out.
+## 📦 Dependencies
 
-## 📧 Contact
-
-**Julia Nowicka**
-- GitHub: [@julianowicka](https://github.com/julianowicka)
-- Email: your.email@example.com
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-
----
-
-⭐ If you found this project interesting, please consider giving it a star!
+- **Angular 18** - Latest LTS version
+- **Bootstrap 5** - UI framework
+- **ng-bootstrap** - Angular Bootstrap components
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
