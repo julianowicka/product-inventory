@@ -2,6 +2,8 @@
   class="container col-12 col-md-6 col-lg-4"
   #productForm="ngForm"
   (submit)="addProduct(productForm)"
+  role="form"
+  aria-label="Add new product form"
 >
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
@@ -27,27 +29,48 @@
     />
   </div>
 
-  <div class="input-group mb-3">
-    <span class="input-group-text">$</span>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Price"
-      [min]="1"
-      [max]="10000"
-      name="price"
-      ngModel
-    />
-    <span class="input-group-text">.00</span>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <div class="input-group">
+      <span class="input-group-text" aria-label="Currency">$</span>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="0.00"
+        [min]="0.01"
+        [max]="10000"
+        [step]="0.01"
+        name="price"
+        id="price"
+        ngModel
+        required
+        aria-describedby="price-help"
+      />
+      <span class="input-group-text" aria-label="Cents">.00</span>
+    </div>
+    <div id="price-help" class="form-text">Enter price between $0.01 and $10,000</div>
   </div>
 
-  <select class="form-select mb-4" name="quantity" ngModel>
-    <option selected>Quantity</option>
-    <option value="1">5</option>
-    <option value="2">10</option>
-    <option value="3">15</option>
-  </select>
-  <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">
-    Add new products
+  <div class="mb-3">
+    <label for="quantity" class="form-label">Quantity</label>
+    <select class="form-select" name="quantity" id="quantity" ngModel required>
+      <option value="" disabled selected>Select quantity</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+  <button 
+    type="submit" 
+    class="btn btn-primary" 
+    [disabled]="!productForm.valid"
+    aria-describedby="submit-help"
+  >
+    Add Product
   </button>
+  <div id="submit-help" class="form-text">
+    Fill in all required fields to enable the submit button
+  </div>
 </form>

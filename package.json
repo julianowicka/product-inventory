@@ -37,6 +37,7 @@
     "@angular/localize": "^18.2.13",
     "@types/jasmine": "~4.3.0",
     "angular-eslint": "20.2.0",
+    "axe-core": "^4.10.3",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",

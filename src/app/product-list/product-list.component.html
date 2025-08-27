@@ -1,22 +1,41 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Description</th>
-    <th scope="col">Price</th>
-    <th scope="col">Quantity</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let product of products; let i = index">
-    <th scope="row">{{ i }}</th>
-    <td>{{ product.name}}</td>
-    <td>{{ product.description}}</td>
-    <td>{{ product.price }}PLN</td>
-    <td>{{ product.quantity }}pcs</td>
-    <td><button class="btn btn-small btn-danger" (click)="deleteProducts(product.id)">Delete</button></td>
-  </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-hover" role="table" aria-label="Products inventory">
+    <caption class="visually-hidden">Product inventory table</caption>
+    <thead>
+      <tr>
+        <th scope="col" id="col-id">#</th>
+        <th scope="col" id="col-name">Name</th>
+        <th scope="col" id="col-description">Description</th>
+        <th scope="col" id="col-price">Price</th>
+        <th scope="col" id="col-quantity">Quantity</th>
+        <th scope="col" id="col-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index" [attr.aria-label]="'Product ' + (i + 1) + ': ' + product.name">
+        <th scope="row" headers="col-id">{{ i + 1 }}</th>
+        <td headers="col-name">{{ product.name }}</td>
+        <td headers="col-description">{{ product.description }}</td>
+        <td headers="col-price">{{ product.price | currency:'PLN' }}</td>
+        <td headers="col-quantity">{{ product.quantity }} pcs</td>
+        <td headers="col-actions">
+          <button 
+            class="btn btn-sm btn-danger" 
+            (click)="deleteProducts(product.id)"
+            [attr.data-product-id]="product.id"
+            [attr.aria-label]="'Delete product ' + product.name"
+            title="Delete this product"
+            tabindex="0"
+          >
+            <span aria-hidden="true">🗑️</span>
+            <span class="visually-hidden">Delete</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="products.length === 0" class="text-center py-5" role="status" aria-live="polite">
+  <p class="text-muted">No products found. Add your first product to get started!</p>
+</div>
