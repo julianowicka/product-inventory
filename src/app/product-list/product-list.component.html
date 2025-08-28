@@ -16,10 +16,16 @@
             <span class="badge bg-primary fs-6 me-3">
               {{ products.length }} {{ products.length === 1 ? 'Product' : 'Products' }}
             </span>
+            <span class="badge bg-success fs-6">
+              Total Value: {{ getTotalInventoryValue() | currency:'PLN' }}
+            </span>
           </div>
         </div>
         <div class="card-body p-0">
-          <div class="table-responsive">
+          <div *ngIf="loading" class="p-3">
+            <app-skeleton-loading type="table-row" [count]="5"></app-skeleton-loading>
+          </div>
+          <div class="table-responsive" *ngIf="!loading">
             <table class="table table-hover mb-0" role="table" aria-label="Products inventory">
               <caption class="visually-hidden">Product inventory table</caption>
               <thead>
@@ -33,7 +39,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let product of products; let i = index" 
+                <tr *ngFor="let product of products; let i = index; trackBy: trackByProductId" 
                     [attr.aria-label]="'Product ' + (i + 1) + ': ' + product.name"
                     class="slide-in">
                   <th scope="row" headers="col-id" class="text-center">
