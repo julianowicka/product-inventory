@@ -7,10 +7,13 @@ A modern Angular application for managing product inventory with a clean, respon
 - **Product Management**: Add, view, and delete products with intuitive interface
 - **Modern UI/UX**: Beautiful, responsive design with smooth animations
 - **Smart Inventory**: Visual stock level indicators and product status badges
+- **Advanced Filtering**: Search, sort, and filter products by multiple criteria
+- **Data Export**: Export products to CSV/JSON and generate comprehensive reports
 - **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
 - **Responsive Design**: Optimized for all devices and screen sizes
 - **Error Handling**: Robust error management with user-friendly notifications
 - **Performance Optimized**: Lazy loading, caching, and OnPush change detection
+- **Advanced Features**: Advanced filtering, sorting, data export, and comprehensive reporting
 - **Modern Angular**: Built with Angular 18 and latest best practices
 - **Code Quality**: ESLint and Prettier for consistent code style
 
@@ -101,6 +104,12 @@ src/
 │   ├── product-list/         # Product list component (standalone)
 │   ├── error-handling/       # Error handling service and components
 │   ├── shared/               # Shared services and components
+│   │   ├── filter.service.ts           # Advanced filtering and sorting
+│   │   ├── export.service.ts           # Data export functionality
+│   │   ├── advanced-filter.component.ts # Advanced filter UI
+│   │   ├── loading.service.ts          # Loading state management
+│   │   ├── search.service.ts           # Debounced search functionality
+│   │   └── skeleton-loading.component.ts # Loading skeleton component
 │   ├── app.component.*       # Main app component
 │   ├── app.module.ts         # App module
 │   └── app-routing.module.ts # Routing configuration
@@ -119,6 +128,7 @@ src/
 - **UI/UX**: Modern, responsive design with excellent user experience
 - **Error Handling**: Comprehensive error management with user-friendly notifications
 - **Performance**: Lazy loading, OnPush change detection, caching, and optimization techniques
+- **Advanced Features**: Advanced filtering, sorting, data export, and comprehensive reporting
 
 ## 🔧 Configuration Files
 
@@ -145,5 +155,8 @@ This project uses automated CI/CD with GitHub Actions:
 - **Performance**: Bundle size monitoring
 
 ### Live Demo
-- **Production**: [View Live Demo](https://[username].github.io/[repo]/)
-- **Staging**: [View Staging](https://[username].github.io/[repo]/staging/)
+- **Production**: [View Live Demo](https://julianowicka.github.io/[repo]/)
+- **Staging**: [View Staging](https://julianowicka.github.io/[repo]/staging/)
+
+*Built with ❤️ by Julia Nowicka*
+
