@@ -4,28 +4,33 @@ import { Router } from '@angular/router';
 import { AddProductComponent } from './add-product.component';
 import { ProductService } from '../product-list/product-service';
 import { Product } from '../product-list/product-model';
+import { ErrorService } from '../error-handling/error.service';
 
 describe('AddProductComponent', () => {
   let component: AddProductComponent;
   let fixture: ComponentFixture<AddProductComponent>;
   let productService: jasmine.SpyObj<ProductService>;
   let router: jasmine.SpyObj<Router>;
+  let errorService: jasmine.SpyObj<ErrorService>;
 
   beforeEach(async () => {
     const productServiceSpy = jasmine.createSpyObj('ProductService', ['addProduct']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const errorServiceSpy = jasmine.createSpyObj('ErrorService', ['showError', 'showWarning', 'showSuccess']);
 
     await TestBed.configureTestingModule({
       declarations: [AddProductComponent],
       imports: [FormsModule],
       providers: [
         { provide: ProductService, useValue: productServiceSpy },
-        { provide: Router, useValue: routerSpy }
+        { provide: Router, useValue: routerSpy },
+        { provide: ErrorService, useValue: errorServiceSpy }
       ]
     }).compileComponents();
 
     productService = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    errorService = TestBed.inject(ErrorService) as jasmine.SpyObj<ErrorService>;
   });
 
   beforeEach(() => {
@@ -46,15 +51,15 @@ describe('AddProductComponent', () => {
         price: 10.99,
         quantity: 5
       },
-      valid: true
+      valid: true,
+      resetForm: jasmine.createSpy('resetForm')
     };
-
-    spyOn(console, 'log');
 
     component.addProduct(mockForm as any);
 
     expect(productService.addProduct).toHaveBeenCalledWith(jasmine.any(Product));
-    expect(console.log).toHaveBeenCalledWith('product');
+    expect(router.navigate).toHaveBeenCalledWith(['/products']);
+    expect(mockForm.resetForm).toHaveBeenCalled();
     
     const addedProduct = productService.addProduct.calls.mostRecent().args[0];
     expect(addedProduct.name).toBe('Test Product');
@@ -74,12 +79,10 @@ describe('AddProductComponent', () => {
       valid: false
     };
 
-    spyOn(console, 'log');
-
     component.addProduct(mockForm as any);
 
-    expect(productService.addProduct).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalled();
+    expect(errorService.showWarning).toHaveBeenCalledWith('Please fill in all required fields correctly');
+    expect(productService.addProduct).not.toHaveBeenCalled();
   });
 
   it('should create product with correct properties', () => {
@@ -90,7 +93,8 @@ describe('AddProductComponent', () => {
         price: 25.50,
         quantity: 10
       },
-      valid: true
+      valid: true,
+      resetForm: jasmine.createSpy('resetForm')
     };
 
     component.addProduct(mockForm as any);
