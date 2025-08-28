@@ -25,16 +25,7 @@ export class ProductListComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-
-    for (let i = 0; i < 10; i++) {
-      const product = new Product();
-      product.name = `Product ${i}`;
-      product.description = `Description ${i}`;
-      product.price = i + 1;
-      product.quantity = i + 1;
-      this.products.push(product);
-    }
+    this.products = this.productService.getProducts() || [];
   }
 
   deleteProducts(id?: number): void {
