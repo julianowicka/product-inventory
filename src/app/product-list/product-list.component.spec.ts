@@ -148,6 +148,6 @@ describe('ProductListComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('No products found');
+    expect(compiled.textContent).toContain('No Products Found');
   });
 });
