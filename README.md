@@ -108,12 +108,14 @@ src/
 - **Modern Angular**: Uses inject() function instead of constructor injection
 - **Accessibility**: Proper label associations and semantic HTML
 - **Testing**: Comprehensive unit tests with 100% statement and line coverage
+- **CI/CD**: Automated testing, building, and deployment with GitHub Actions
 
 ## 🔧 Configuration Files
 
 - `.eslintrc.js` - ESLint configuration
 - `.prettierrc` - Prettier formatting rules
 - `.prettierignore` - Files to exclude from formatting
+- `.github/workflows/` - CI/CD pipeline configurations
 
 ## 📦 Dependencies
 
@@ -122,3 +124,16 @@ src/
 - **ng-bootstrap** - Angular Bootstrap components
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
+
+## 🚀 Deployment
+
+This project uses automated CI/CD with GitHub Actions:
+
+- **Staging**: Automatic deployment on push to main branch
+- **Production**: Manual deployment with release creation
+- **Security**: Automated vulnerability scanning
+- **Performance**: Bundle size monitoring
+
+### Live Demo
+- **Production**: [View Live Demo](https://[username].github.io/[repo]/)
+- **Staging**: [View Staging](https://[username].github.io/[repo]/staging/)
