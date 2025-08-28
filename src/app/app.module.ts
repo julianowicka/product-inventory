@@ -12,7 +12,7 @@ import { ProductService } from './product-list/product-service';
 import { ErrorDisplayComponent } from './error-handling/error-display.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductListComponent, AddProductComponent, ErrorDisplayComponent],
+  declarations: [AppComponent, ErrorDisplayComponent],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, CommonModule],
   providers: [ProductService],
   bootstrap: [AppComponent],

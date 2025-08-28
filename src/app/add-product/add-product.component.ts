@@ -1,4 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Product } from '../product-list/product-model';
 import { ProductService } from '../product-list/product-service';
@@ -9,6 +12,9 @@ import { ErrorService } from '../error-handling/error.service';
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddProductComponent {
   private productService = inject(ProductService);
