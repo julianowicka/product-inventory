@@ -15,7 +15,7 @@ describe('ProductListComponent', () => {
     const errorServiceSpy = jasmine.createSpyObj('ErrorService', ['showError', 'showWarning', 'showInfo']);
     
     await TestBed.configureTestingModule({
-      declarations: [ProductListComponent],
+      imports: [ProductListComponent],
       providers: [
         { provide: ProductService, useValue: spy },
         { provide: ErrorService, useValue: errorServiceSpy }

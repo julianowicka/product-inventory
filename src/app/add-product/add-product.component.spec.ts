@@ -19,8 +19,7 @@ describe('AddProductComponent', () => {
     const errorServiceSpy = jasmine.createSpyObj('ErrorService', ['showError', 'showWarning', 'showSuccess']);
 
     await TestBed.configureTestingModule({
-      declarations: [AddProductComponent],
-      imports: [FormsModule],
+      imports: [AddProductComponent],
       providers: [
         { provide: ProductService, useValue: productServiceSpy },
         { provide: Router, useValue: routerSpy },
