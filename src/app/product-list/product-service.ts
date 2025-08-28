@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product-model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService {
   private _products: Product[] = [];
 
@@ -15,7 +17,10 @@ export class ProductService {
   }
 
   deleteProducts(id?: number) {
+    if (id === undefined) return;
     const index = this._products.findIndex((p) => p.id === id);
-    this._products.splice(index, 1);
+    if (index !== -1) {
+      this._products.splice(index, 1);
+    }
   }
 }
