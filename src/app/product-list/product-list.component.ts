@@ -6,21 +6,25 @@ import { ProductService } from './product-service';
 import { ErrorService } from '../error-handling/error.service';
 import { LoadingService } from '../shared/loading.service';
 import { SkeletonLoadingComponent } from '../shared/skeleton-loading.component';
+import { FilterService } from '../shared/filter.service';
+import { AdvancedFilterComponent } from '../shared/advanced-filter.component';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, SkeletonLoadingComponent],
+  imports: [CommonModule, RouterModule, SkeletonLoadingComponent, AdvancedFilterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   loading = false;
   private productService = inject(ProductService);
   private errorService = inject(ErrorService);
   private loadingService = inject(LoadingService);
+  private filterService = inject(FilterService);
 
   @HostListener('keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
@@ -37,6 +41,7 @@ export class ProductListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadProducts();
+    this.setupFiltering();
   }
 
   private loadProducts(): void {
@@ -47,7 +52,9 @@ export class ProductListComponent implements OnInit {
     setTimeout(() => {
       try {
         this.products = this.productService.getProducts() || [];
+        this.filteredProducts = [...this.products];
         this.invalidateCache(); // Reset cache when products change
+        this.setupFiltering(); // Re-setup filtering with new products
         
         if (this.products.length === 0) {
           this.errorService.showInfo('No products found. Add your first product to get started!');
@@ -72,7 +79,7 @@ export class ProductListComponent implements OnInit {
 
   getTotalInventoryValue(): number {
     if (this._totalValueCache === null) {
-      this._totalValueCache = this.products.reduce((total, product) => {
+      this._totalValueCache = this.filteredProducts.reduce((total, product) => {
         return total + ((product.price || 0) * (product.quantity || 0));
       }, 0);
     }
@@ -81,6 +88,13 @@ export class ProductListComponent implements OnInit {
 
   private invalidateCache(): void {
     this._totalValueCache = null;
+  }
+
+  private setupFiltering(): void {
+    this.filterService.filterProducts(this.products).subscribe(filteredProducts => {
+      this.filteredProducts = filteredProducts;
+      this.invalidateCache();
+    });
   }
 
   deleteProducts(id?: number): void {
