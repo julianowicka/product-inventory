@@ -2,23 +2,28 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductListComponent } from './product-list.component';
 import { ProductService } from './product-service';
 import { Product } from './product-model';
+import { ErrorService } from '../error-handling/error.service';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
   let fixture: ComponentFixture<ProductListComponent>;
   let productService: jasmine.SpyObj<ProductService>;
+  let errorService: jasmine.SpyObj<ErrorService>;
 
   beforeEach(async () => {
     const spy = jasmine.createSpyObj('ProductService', ['getProducts', 'deleteProducts']);
+    const errorServiceSpy = jasmine.createSpyObj('ErrorService', ['showError', 'showWarning', 'showInfo']);
     
     await TestBed.configureTestingModule({
       declarations: [ProductListComponent],
       providers: [
-        { provide: ProductService, useValue: spy }
+        { provide: ProductService, useValue: spy },
+        { provide: ErrorService, useValue: errorServiceSpy }
       ]
     }).compileComponents();
 
     productService = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
+    errorService = TestBed.inject(ErrorService) as jasmine.SpyObj<ErrorService>;
   });
 
   beforeEach(() => {
