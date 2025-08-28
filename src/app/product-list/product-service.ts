@@ -8,6 +8,7 @@ import { ErrorService } from '../error-handling/error.service';
 export class ProductService {
   private _products: Product[] = [];
   private nextId = 1;
+  private _productsCache: Product[] | null = null;
 
   constructor(private errorService: ErrorService) {}
 
@@ -27,6 +28,7 @@ export class ProductService {
 
       product.id = this.nextId++;
       this._products.push(product);
+      this._productsCache = null; // Invalidate cache
       
       this.errorService.showSuccess(
         `Product "${product.name}" added successfully`,
@@ -42,7 +44,10 @@ export class ProductService {
   }
 
   getProducts(): Product[] {
-    return this._products;
+    if (this._productsCache === null) {
+      this._productsCache = [...this._products];
+    }
+    return this._productsCache;
   }
 
   deleteProducts(id?: number): void {
@@ -64,6 +69,7 @@ export class ProductService {
       const index = this._products.findIndex((p) => p.id === id);
       if (index !== -1) {
         this._products.splice(index, 1);
+        this._productsCache = null; // Invalidate cache
         this.errorService.showSuccess(
           `Product "${product.name}" deleted successfully`,
           `Product ID: ${id}`
