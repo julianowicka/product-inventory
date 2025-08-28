@@ -9,6 +9,7 @@ A modern Angular application for managing product inventory with a clean, respon
 - **Smart Inventory**: Visual stock level indicators and product status badges
 - **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
 - **Responsive Design**: Optimized for all devices and screen sizes
+- **Error Handling**: Robust error management with user-friendly notifications
 - **Modern Angular**: Built with Angular 18 and latest best practices
 - **Code Quality**: ESLint and Prettier for consistent code style
 
@@ -97,6 +98,7 @@ src/
 ├── app/
 │   ├── add-product/          # Add product component
 │   ├── product-list/         # Product list component
+│   ├── error-handling/       # Error handling service and components
 │   ├── app.component.*       # Main app component
 │   ├── app.module.ts         # App module
 │   └── app-routing.module.ts # Routing configuration
@@ -113,6 +115,7 @@ src/
 - **Testing**: Comprehensive unit tests with 100% statement and line coverage
 - **CI/CD**: Automated testing, building, and deployment with GitHub Actions
 - **UI/UX**: Modern, responsive design with excellent user experience
+- **Error Handling**: Comprehensive error management with user-friendly notifications
 
 ## 🔧 Configuration Files
 
