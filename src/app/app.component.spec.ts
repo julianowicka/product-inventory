@@ -16,18 +16,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'product-inventory'`, () => {
+  it(`should have as title 'Product Inventory'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('product-inventory');
+    expect(app.title).toEqual('Product Inventory');
   });
 
-  it('should render title', () => {
+  it('should render navigation', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'product-inventory app is running!'
-    );
+    expect(compiled.querySelector('nav')).toBeTruthy();
+    expect(compiled.querySelector('.navbar-brand')?.textContent).toContain('Product Inventory');
   });
 });
