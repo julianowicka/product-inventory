@@ -10,6 +10,7 @@ A modern Angular application for managing product inventory with a clean, respon
 - **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
 - **Responsive Design**: Optimized for all devices and screen sizes
 - **Error Handling**: Robust error management with user-friendly notifications
+- **Performance Optimized**: Lazy loading, caching, and OnPush change detection
 - **Modern Angular**: Built with Angular 18 and latest best practices
 - **Code Quality**: ESLint and Prettier for consistent code style
 
@@ -96,9 +97,10 @@ npm run test:ci
 ```
 src/
 ├── app/
-│   ├── add-product/          # Add product component
-│   ├── product-list/         # Product list component
+│   ├── add-product/          # Add product component (standalone)
+│   ├── product-list/         # Product list component (standalone)
 │   ├── error-handling/       # Error handling service and components
+│   ├── shared/               # Shared services and components
 │   ├── app.component.*       # Main app component
 │   ├── app.module.ts         # App module
 │   └── app-routing.module.ts # Routing configuration
@@ -116,6 +118,7 @@ src/
 - **CI/CD**: Automated testing, building, and deployment with GitHub Actions
 - **UI/UX**: Modern, responsive design with excellent user experience
 - **Error Handling**: Comprehensive error management with user-friendly notifications
+- **Performance**: Lazy loading, OnPush change detection, caching, and optimization techniques
 
 ## 🔧 Configuration Files
 
