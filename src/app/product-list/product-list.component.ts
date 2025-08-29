@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject, HostListener, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Product } from './product-model';
@@ -8,6 +8,8 @@ import { LoadingService } from '../shared/loading.service';
 import { SkeletonLoadingComponent } from '../shared/skeleton-loading.component';
 import { FilterService } from '../shared/filter.service';
 import { AdvancedFilterComponent } from '../shared/advanced-filter.component';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +19,7 @@ import { AdvancedFilterComponent } from '../shared/advanced-filter.component';
   imports: [CommonModule, RouterModule, SkeletonLoadingComponent, AdvancedFilterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   loading = false;
@@ -25,6 +27,8 @@ export class ProductListComponent implements OnInit {
   private errorService = inject(ErrorService);
   private loadingService = inject(LoadingService);
   private filterService = inject(FilterService);
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   @HostListener('keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
@@ -42,10 +46,20 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
     this.setupFiltering();
+    
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.refreshProducts();
+    });
+  }
+
+  ngOnDestroy(): void {
   }
 
   private loadProducts(): void {
     this.loading = true;
+    this.cdr.detectChanges(); // Force change detection for loading state
     this.loadingService.show();
 
     // Simulate loading delay for better UX
@@ -67,8 +81,13 @@ export class ProductListComponent implements OnInit {
       } finally {
         this.loading = false;
         this.loadingService.hide();
+        this.cdr.detectChanges(); // Force change detection after loading
       }
-    }, 500);
+    }, 300);
+  }
+
+  refreshProducts(): void {
+    this.loadProducts();
   }
 
   private _totalValueCache: number | null = null;
@@ -113,8 +132,7 @@ export class ProductListComponent implements OnInit {
       if (confirm(`Are you sure you want to delete "${product.name}"?`)) {
         this.productService.deleteProducts(id);
         // Refresh the products list
-        this.products = this.productService.getProducts() || [];
-        this.invalidateCache(); // Reset cache after deletion
+        this.refreshProducts();
       }
     } catch (error) {
       this.errorService.showError(
